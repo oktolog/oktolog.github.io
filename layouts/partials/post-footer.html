@@ -1,0 +1,58 @@
+<!-- Series navigation -->
+{{ with .Params.series }}
+{{ $series := . }}
+{{ $seriesPages := where $.Site.RegularPages "Params.series" $series }}
+{{ if gt (len $seriesPages) 1 }}
+<section class="series-nav">
+  <p class="series-label">part of series: <strong>{{ $series }}</strong></p>
+  <div class="series-links">
+    {{ range $i, $p := $seriesPages }}
+      {{ if eq $p.Permalink $.Permalink }}
+        {{ $prev := index $seriesPages (sub $i 1) }}
+        {{ $next := index $seriesPages (add $i 1) }}
+        {{ if and (ge $i 1) $prev }}
+        <a href="{{ $prev.Permalink }}" class="series-prev">&larr; {{ $prev.Title }}</a>
+        {{ end }}
+        {{ if $next }}
+        <a href="{{ $next.Permalink }}" class="series-next">{{ $next.Title }} &rarr;</a>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
+<!-- Related posts -->
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ with $related }}
+<section class="related-posts">
+  <h3 class="related-title">related</h3>
+  <ul class="related-list">
+    {{ range . }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a> <span class="related-date">{{ .Date.Format "2006-01-02" }}</span></li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+<!-- Backlinks -->
+{{ with .Params.backlinks }}
+<section class="backlinks">
+  <h3 class="backlinks-title">referenced in</h3>
+  <ul class="backlinks-list">
+    {{ range . }}
+    {{ $page := $.Site.GetPage . }}
+    {{ with $page }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{ end }}
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+<!-- Share -->
+{{ partial "share.html" . }}
+
+<!-- Giscus comments -->
+{{ partial "giscus.html" . }}

@@ -1,0 +1,54 @@
+<header class="site-header">
+  <nav class="nav" aria-label="Main navigation">
+    <!-- Site name (left) -->
+    <a href="/" class="nav-brand" aria-label="Home">{{ .Site.Title }}</a>
+
+    <!-- Page links (center) -->
+    <ul class="nav-links" role="list">
+      <li><a href="/notes/" {{ if eq .Section "notes" }}aria-current="page"{{ end }}>notes</a></li>
+      <li><a href="/research/" {{ if eq .Section "research" }}aria-current="page"{{ end }}>research</a></li>
+      <li><a href="/projects/" {{ if eq .Section "projects" }}aria-current="page"{{ end }}>projects</a></li>
+      <li><a href="/ctf/" {{ if eq .Section "ctf" }}aria-current="page"{{ end }}>ctf</a></li>
+      <li><a href="/tags/" {{ if eq .RelPermalink "/tags/" }}aria-current="page"{{ end }}>tags</a></li>
+      <li><a href="/about/" {{ if eq .RelPermalink "/about/" }}aria-current="page"{{ end }}>about</a></li>
+    </ul>
+
+    <!-- Actions (right) -->
+    <div class="nav-actions">
+      <button class="nav-btn" id="search-btn" onclick="openSearch()" aria-label="Search (press / to open)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <button class="nav-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme (press t)">
+        <!-- Moon icon (shown in dark mode) -->
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <!-- Sun icon (shown in light mode) -->
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  <!-- Mobile nav row (visible only on small screens via CSS) -->
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="/notes/" {{ if eq .Section "notes" }}aria-current="page"{{ end }}>notes</a>
+    <a href="/research/" {{ if eq .Section "research" }}aria-current="page"{{ end }}>research</a>
+    <a href="/projects/" {{ if eq .Section "projects" }}aria-current="page"{{ end }}>projects</a>
+    <a href="/ctf/" {{ if eq .Section "ctf" }}aria-current="page"{{ end }}>ctf</a>
+    <a href="/tags/" {{ if eq .RelPermalink "/tags/" }}aria-current="page"{{ end }}>tags</a>
+    <a href="/about/" {{ if eq .RelPermalink "/about/" }}aria-current="page"{{ end }}>about</a>
+    <a href="/now/" {{ if eq .RelPermalink "/now/" }}aria-current="page"{{ end }}>now</a>
+  </nav>
+</header>

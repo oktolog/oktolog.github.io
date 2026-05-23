@@ -1,0 +1,10 @@
+<div class="share-buttons">
+  <a class="share-btn share-bluesky"
+     href="https://bsky.app/intent/compose?text={{ .Title | urlquery }}%20{{ .Permalink | urlquery }}"
+     target="_blank" rel="noopener noreferrer">
+    share on bluesky &#8599;
+  </a>
+  <button class="share-btn share-copy" onclick="copyPageLink(this)" data-url="{{ .Permalink }}">
+    copy link
+  </button>
+</div>

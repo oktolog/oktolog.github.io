@@ -1,0 +1,67 @@
+baseURL: "https://oktolog.github.io/"
+languageCode: "en-us"
+title: "oktolog"
+
+params:
+  author: "oktolog"
+  description: "Notes on security, code, and systems"
+  tagline: "notes on security, code, and systems"
+  defaultTheme: "dark"
+
+  social:
+    github: "oktolog"
+    bluesky: "oktolog.bsky.social"
+    discord: "oktolog"
+    rss: true
+
+  features:
+    readingTime: true
+    wordCount: true
+    tableOfContents: true
+    progressBar: true
+    copyCode: true
+    giscus: true
+    goatcounter: true
+    katex: true
+    mermaid: true
+
+  giscus:
+    repo: "oktolog/oktolog.github.io"
+    repoId: "FILL_IN"
+    category: "Comments"
+    categoryId: "FILL_IN"
+
+  goatcounter:
+    code: "oktolog"
+
+taxonomies:
+  tag: "tags"
+  series: "series"
+
+markup:
+  goldmark:
+    extensions:
+      footnote: true
+      strikethrough: true
+      table: true
+      taskList: true
+    renderer:
+      unsafe: true
+  highlight:
+    style: "github-dark"
+    lineNos: false
+    codeFences: true
+    guessSyntax: true
+    tabWidth: 2
+
+outputs:
+  home: ["HTML", "RSS", "JSON"]
+  section: ["HTML", "RSS"]
+  taxonomy: ["HTML"]
+  term: ["HTML"]
+
+pagination:
+  pagerSize: 15
+
+enableRobotsTXT: true
+enableGitInfo: true

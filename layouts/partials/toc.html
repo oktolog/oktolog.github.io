@@ -1,0 +1,8 @@
+{{ if and .Params.toc .TableOfContents }}
+<details class="toc-container" {{ if not (eq (getenv "HUGO_ENV") "mobile") }}open{{ end }}>
+  <summary class="toc-title">Contents</summary>
+  <nav class="toc" aria-label="Table of contents">
+    {{ .TableOfContents }}
+  </nav>
+</details>
+{{ end }}

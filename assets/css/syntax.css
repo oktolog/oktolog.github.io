@@ -1,0 +1,67 @@
+/* Hugo Chroma syntax highlighting — github-dark style override */
+/* These supplement Hugo's built-in syntax highlighting */
+
+/* .highlight border/radius/margin are now in main.css code block section */
+/* pre inside .highlight gets rounded bottom corners only */
+.highlight pre {
+  border-radius: 0 0 6px 6px;
+}
+
+/* Chroma token colors (dark mode) */
+[data-theme="dark"] .chroma .k  { color: #ff7b72; } /* keyword */
+[data-theme="dark"] .chroma .kd { color: #ff7b72; } /* keyword declaration */
+[data-theme="dark"] .chroma .kn { color: #ff7b72; } /* keyword namespace */
+[data-theme="dark"] .chroma .s  { color: #a5d6ff; } /* string */
+[data-theme="dark"] .chroma .s1 { color: #a5d6ff; }
+[data-theme="dark"] .chroma .s2 { color: #a5d6ff; }
+[data-theme="dark"] .chroma .c  { color: #8b949e; font-style: italic; } /* comment */
+[data-theme="dark"] .chroma .c1 { color: #8b949e; font-style: italic; }
+[data-theme="dark"] .chroma .cm { color: #8b949e; font-style: italic; }
+[data-theme="dark"] .chroma .nf { color: #d2a8ff; } /* function name */
+[data-theme="dark"] .chroma .na { color: #d2a8ff; } /* attribute */
+[data-theme="dark"] .chroma .m  { color: #79c0ff; } /* number */
+[data-theme="dark"] .chroma .mi { color: #79c0ff; }
+[data-theme="dark"] .chroma .mf { color: #79c0ff; }
+[data-theme="dark"] .chroma .n  { color: #e6edf3; }
+[data-theme="dark"] .chroma .nb { color: #ffa657; } /* builtin */
+[data-theme="dark"] .chroma .o  { color: #ff7b72; } /* operator */
+[data-theme="dark"] .chroma .p  { color: #e6edf3; }
+[data-theme="dark"] .chroma .nt { color: #7ee787; } /* HTML tag */
+[data-theme="dark"] .chroma .ni { color: #79c0ff; } /* entity */
+
+/* Chroma token colors (light mode) */
+[data-theme="light"] .chroma .k  { color: #cf222e; }
+[data-theme="light"] .chroma .kd { color: #cf222e; }
+[data-theme="light"] .chroma .kn { color: #cf222e; }
+[data-theme="light"] .chroma .s  { color: #0a3069; }
+[data-theme="light"] .chroma .s1 { color: #0a3069; }
+[data-theme="light"] .chroma .s2 { color: #0a3069; }
+[data-theme="light"] .chroma .c  { color: #6e7781; font-style: italic; }
+[data-theme="light"] .chroma .c1 { color: #6e7781; font-style: italic; }
+[data-theme="light"] .chroma .cm { color: #6e7781; font-style: italic; }
+[data-theme="light"] .chroma .nf { color: #8250df; }
+[data-theme="light"] .chroma .na { color: #8250df; }
+[data-theme="light"] .chroma .m  { color: #0550ae; }
+[data-theme="light"] .chroma .mi { color: #0550ae; }
+[data-theme="light"] .chroma .mf { color: #0550ae; }
+[data-theme="light"] .chroma .n  { color: #1f2328; }
+[data-theme="light"] .chroma .nb { color: #953800; }
+[data-theme="light"] .chroma .o  { color: #cf222e; }
+[data-theme="light"] .chroma .p  { color: #1f2328; }
+[data-theme="light"] .chroma .nt { color: #116329; }
+
+/* ── Diff blocks (language-diff / shell diff) ─────────────── */
+/* Inserted lines — green */
+.chroma .gi { color: #3fb950; background: rgba(63,185,80,.12); display: block; width: 100%; }
+/* Deleted lines — red */
+.chroma .gd { color: #f85149; background: rgba(248,81,73,.12); display: block; width: 100%; }
+/* Generic diff header */
+.chroma .gh { color: #79c0ff; font-weight: bold; }
+/* Hunk header @@ */
+.chroma .gu { color: #bc8cff; }
+
+/* Light mode diff overrides */
+[data-theme="light"] .chroma .gi { color: #116329; background: rgba(17,99,41,.08); }
+[data-theme="light"] .chroma .gd { color: #cf222e; background: rgba(207,34,46,.08); }
+[data-theme="light"] .chroma .gh { color: #0550ae; }
+[data-theme="light"] .chroma .gu { color: #8250df; }

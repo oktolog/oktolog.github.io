@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-copy">&copy; {{ now.Year }} {{ .Site.Params.author }}</span>
+    <div class="footer-social">
+      {{ with .Site.Params.social.github }}<a href="https://github.com/{{ . }}" target="_blank" rel="noopener noreferrer">github</a>{{ end -}}
+      {{ with .Site.Params.social.bluesky }}<a href="https://bsky.app/profile/{{ . }}" target="_blank" rel="noopener noreferrer">bluesky</a>{{ end -}}
+      {{ if .Site.Params.social.rss }}<a href="/index.xml">rss</a>{{ end }}
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" data-theme="dark">
+<head>
+  <!-- No-flash theme: read localStorage before paint -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+    })();
+  </script>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <!-- Reading progress bar (only on single posts) -->
+  {{ if .IsPage }}
+  <div id="reading-progress" aria-hidden="true"></div>
+  {{ end }}
+
+  {{ partial "nav.html" . }}
+
+  <main id="main-content">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  <!-- Search overlay -->
+  <div id="search-overlay" class="search-overlay" aria-hidden="true" role="dialog" aria-label="Search">
+    <div class="search-container">
+      <div id="search-ui"></div>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts overlay -->
+  <div id="shortcuts-overlay" class="shortcuts-overlay" aria-hidden="true" role="dialog" aria-label="Keyboard shortcuts">
+    <div class="shortcuts-card">
+      <h3>Keyboard Shortcuts</h3>
+      <table>
+        <tr><td><kbd>/</kbd></td><td>open search</td></tr>
+        <tr><td><kbd>t</kbd></td><td>toggle dark / light</td></tr>
+        <tr><td><kbd>g</kbd> + <kbd>h</kbd></td><td>go home</td></tr>
+        <tr><td><kbd>g</kbd> + <kbd>n</kbd></td><td>go to notes</td></tr>
+        <tr><td><kbd>g</kbd> + <kbd>r</kbd></td><td>go to research</td></tr>
+        <tr><td><kbd>g</kbd> + <kbd>p</kbd></td><td>go to projects</td></tr>
+        <tr><td><kbd>g</kbd> + <kbd>c</kbd></td><td>go to ctf</td></tr>
+        <tr><td><kbd>g</kbd> + <kbd>t</kbd></td><td>go to tags</td></tr>
+        <tr><td><kbd>g</kbd> + <kbd>a</kbd></td><td>go to about</td></tr>
+        <tr><td><kbd>?</kbd></td><td>show this overlay</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>close search / overlay</td></tr>
+      </table>
+      <button class="shortcuts-close" onclick="closeShortcutsOverlay()" aria-label="Close">close</button>
+    </div>
+  </div>
+
+  <!-- Back-to-top button -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+  <!-- JS assets -->
+  {{ $theme := resources.Get "js/theme.js" | fingerprint }}
+  <script src="{{ $theme.RelPermalink }}" defer></script>
+  {{ $progress := resources.Get "js/progress.js" | fingerprint }}
+  <script src="{{ $progress.RelPermalink }}" defer></script>
+  {{ $copyCode := resources.Get "js/copy-code.js" | fingerprint }}
+  <script src="{{ $copyCode.RelPermalink }}" defer></script>
+  {{ $shortcuts := resources.Get "js/shortcuts.js" | fingerprint }}
+  <script src="{{ $shortcuts.RelPermalink }}" defer></script>
+  {{ $search := resources.Get "js/search.js" | fingerprint }}
+  <script src="{{ $search.RelPermalink }}" defer></script>
+  {{ $backToTop := resources.Get "js/back-to-top.js" | fingerprint }}
+  <script src="{{ $backToTop.RelPermalink }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+kind = "web"
+previewPath = "/"
+title = "oktolog"
+version = "1.0.0"
+id = "hugo_oktolog_blog_2026"
+
+[[services]]
+localPort = 3000
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "cd artifacts/oktolog && hugo server --port 3000 --bind 0.0.0.0 --disableFastRender --noHTTPCache"

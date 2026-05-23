@@ -1,0 +1,14 @@
+# Hugo build output
+public/
+resources/_gen/
+
+# Pagefind search index — built by GitHub Actions, not committed
+static/pagefind/
+
+# Obsidian app config (private — not shared)
+.obsidian/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp

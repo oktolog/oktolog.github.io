@@ -1,0 +1,17 @@
+- name: rop-finder
+  repo: oktolog/rop-finder
+  description: Fast ROP gadget discovery and chain suggestion tool for stripped x86-64 ELF binaries, written in Rust.
+  tags: [rust, exploitation, rop, tooling]
+  status: active
+
+- name: heap-tracer
+  repo: oktolog/heap-tracer
+  description: LD_PRELOAD-based heap allocation tracer that records malloc/free call sites for post-mortem analysis.
+  tags: [c, debugging, heap, tooling]
+  status: active
+
+- name: ctf-toolkit
+  repo: oktolog/ctf-toolkit
+  description: Collection of Python scripts for common CTF tasks — format string automation, ret2libc boilerplate, and pwntools helpers.
+  tags: [python, ctf, exploitation]
+  status: archived

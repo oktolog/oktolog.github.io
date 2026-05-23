@@ -1,0 +1,30 @@
+{{ define "main" }}
+{{ $allTerms := .Site.Taxonomies.tags }}
+{{ $max := 1 }}
+{{ range $allTerms }}
+  {{ if gt (len .Pages) $max }}{{ $max = len .Pages }}{{ end }}
+{{ end }}
+
+<div class="tags-page" data-pagefind-ignore>
+  <header class="list-header">
+    <h1 class="list-title">tags</h1>
+    <p class="list-desc">{{ len $allTerms }} tags across {{ len .Site.RegularPages }} posts</p>
+  </header>
+
+  <div class="tag-cloud" role="list">
+    {{ range $name, $pages := $allTerms }}
+    {{ $count := len $pages.Pages }}
+    {{ $ratio := div (float $count) (float $max) }}
+    {{ $size := add 0.8 (mul $ratio 0.9) }}
+    {{ $opacity := add 0.45 (mul $ratio 0.55) }}
+    <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}/"
+       class="tag-cloud-item"
+       style="font-size: {{ printf "%.2f" $size }}rem; opacity: {{ printf "%.2f" $opacity }};"
+       role="listitem"
+       title="{{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }}">
+      {{ $name }}<span class="tag-cloud-count">{{ $count }}</span>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

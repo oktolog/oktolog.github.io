@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="projects-page" data-pagefind-body>
+  <header class="list-header">
+    <h1 class="list-title">projects</h1>
+  </header>
+
+  {{ if .Site.Data.projects }}
+  <ul class="projects-list" role="list">
+    {{ range .Site.Data.projects }}
+    <li class="project-item">
+      <div class="project-header">
+        <a href="https://github.com/{{ .repo }}" class="project-name" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+        <span class="status-badge status-{{ .status }}">{{ .status }}</span>
+      </div>
+      <p class="project-desc">{{ .description }}</p>
+      {{ with .tags }}
+      <div class="post-list-tags">
+        {{ range . }}<span class="tag-badge">{{ . }}</span>{{ end }}
+      </div>
+      {{ end }}
+      <div class="project-links">
+        <a href="https://github.com/{{ .repo }}" target="_blank" rel="noopener noreferrer" class="project-link">github &#8599;</a>
+        {{ $slug := .name | urlize }}
+        {{ $page := $.Site.GetPage (printf "/projects/%s" $slug) }}
+        {{ with $page }}
+        <a href="{{ .Permalink }}" class="project-link">view README &rarr;</a>
+        {{ end }}
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="empty-state">no projects yet.</p>
+  {{ end }}
+</div>
+{{ end }}

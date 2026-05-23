@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="list-page" data-pagefind-body>
+  <header class="list-header">
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ with .Content }}<div class="list-intro">{{ . }}</div>{{ end }}
+  </header>
+
+  {{ if .Pages }}
+  <ul class="post-list" role="list">
+    {{ range .Pages }}
+    <li class="post-list-item">
+      <span class="post-list-date">{{ .Date.Format "2006-01-02" }}</span>
+      <span class="meta-sep">·</span>
+      <a href="{{ .Permalink }}" class="post-list-title">{{ .Title }}</a>
+      {{ if .Params.description }}
+      <p class="post-list-desc">{{ .Params.description }}</p>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="post-list-tags">
+        {{ range . }}<a href="/tags/{{ . | urlize }}/" class="tag-badge">{{ . }}</a>{{ end }}
+      </div>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="empty-state">nothing here yet.</p>
+  {{ end }}
+
+  <!-- Pagination -->
+  {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}

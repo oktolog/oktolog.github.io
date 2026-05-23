@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="tags-page" data-pagefind-body>
+  <header class="list-header">
+    <h1 class="list-title">tags</h1>
+  </header>
+
+  {{ $terms := .Data.Terms.ByCount }}
+  {{ if $terms }}
+  <ul class="tags-list" role="list">
+    {{ range $terms }}
+    <li class="tags-list-item">
+      <a href="{{ .Page.Permalink }}" class="tag-entry">
+        <span class="tag-name">{{ .Page.Title }}</span>
+        <span class="tag-count">({{ .Count }})</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="empty-state">no tags yet.</p>
+  {{ end }}
+</div>
+{{ end }}

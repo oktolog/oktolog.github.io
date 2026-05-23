@@ -1,0 +1,7 @@
+{{/* callout shortcode — usage: {{< callout type="warning" >}}content{{< /callout >}} */}}
+{{ $type := .Get "type" | default "note" }}
+{{ $icons := dict "note" "ℹ" "tip" "✓" "warning" "⚠" "danger" "✕" "info" "◉" }}
+<div class="callout callout-{{ $type }}">
+  <span class="callout-icon">{{ index $icons $type | default "ℹ" }}</span>
+  <div class="callout-content">{{ .Inner | markdownify }}</div>
+</div>

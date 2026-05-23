@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="error-page">
+  <h1 class="error-code">404</h1>
+  <p class="error-message">page not found.</p>
+  <div id="search-inline" class="search-inline-container"></div>
+  <p class="error-home"><a href="/">go home &rarr;</a></p>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof PagefindUI !== 'undefined') {
+      new PagefindUI({ element: '#search-inline', showImages: false });
+    }
+  });
+</script>
+{{ end }}

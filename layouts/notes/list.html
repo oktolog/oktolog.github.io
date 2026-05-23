@@ -1,0 +1,59 @@
+{{ define "main" }}
+<div class="notes-page" data-pagefind-body>
+  <header class="list-header">
+    <h1 class="list-title">notes</h1>
+    <p class="list-intro">Short-form. Rough edges. Updated often.</p>
+  </header>
+
+  <!-- Filter bar -->
+  <div class="filter-bar" role="group" aria-label="Filter by status">
+    <button class="filter-btn active" data-filter="all" onclick="filterNotes('all', this)">all</button>
+    <button class="filter-btn" data-filter="seedling" onclick="filterNotes('seedling', this)">&#127807; seedling</button>
+    <button class="filter-btn" data-filter="growing" onclick="filterNotes('growing', this)">&#127807; growing</button>
+    <button class="filter-btn" data-filter="evergreen" onclick="filterNotes('evergreen', this)">&#127795; evergreen</button>
+  </div>
+
+  {{ if .Pages }}
+  <ul class="post-list notes-list" role="list">
+    {{ range .Pages }}
+    <li class="post-list-item note-item" data-status="{{ .Params.status | default "seedling" }}">
+      <span class="garden-badge status-{{ .Params.status | default "seedling" }}">
+        {{ if eq (.Params.status | default "seedling") "seedling" }}&#127807; seedling
+        {{ else if eq .Params.status "growing" }}&#127807; growing
+        {{ else if eq .Params.status "evergreen" }}&#127795; evergreen
+        {{ end }}
+      </span>
+      <span class="post-list-date">{{ .Date.Format "2006-01-02" }}</span>
+      <span class="meta-sep">·</span>
+      <a href="{{ .Permalink }}" class="post-list-title">{{ .Title }}</a>
+      {{ with .Params.tags }}
+      <div class="post-list-tags">
+        {{ range . }}<a href="/tags/{{ . | urlize }}/" class="tag-badge">{{ . }}</a>{{ end }}
+      </div>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="empty-state">nothing here yet.</p>
+  {{ end }}
+</div>
+
+<script>
+/* Filter notes by garden status */
+function filterNotes(status, btn) {
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Show/hide items
+  document.querySelectorAll('.note-item').forEach(item => {
+    if (status === 'all' || item.dataset.status === status) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+</script>
+{{ end }}

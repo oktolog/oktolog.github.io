@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="home-page">
+  <!-- Site identity -->
+  <header class="home-header">
+    <h1 class="home-title">{{ .Site.Title }}</h1>
+    <p class="home-tagline">{{ .Site.Params.tagline }}</p>
+    <div class="home-social">
+      {{ with .Site.Params.social.github }}
+      <a href="https://github.com/{{ . }}" target="_blank" rel="noopener noreferrer">github</a>
+      {{ end }}
+      <span class="social-sep" aria-hidden="true">·</span>
+      {{ with .Site.Params.social.bluesky }}
+      <a href="https://bsky.app/profile/{{ . }}" target="_blank" rel="noopener noreferrer">bluesky</a>
+      {{ end }}
+      <span class="social-sep" aria-hidden="true">·</span>
+      {{ with .Site.Params.social.discord }}
+      <a href="#" aria-label="Discord: {{ . }}">discord</a>
+      {{ end }}
+      <span class="social-sep" aria-hidden="true">·</span>
+      <a href="/index.xml" aria-label="RSS feed">rss</a>
+    </div>
+  </header>
+
+  <!-- Recent posts -->
+  <section class="home-posts">
+    <ul class="post-list" role="list">
+      {{ $posts := where .Site.RegularPages "Type" "ne" "page" | first 10 }}
+      {{ range $posts }}
+      <li class="post-list-item">
+        <span class="post-list-date">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="meta-sep">·</span>
+        <a href="{{ .Permalink }}" class="post-list-title">{{ .Title }}</a>
+        {{ with .Params.tags }}
+        {{ range . }}<a href="/tags/{{ . | urlize }}/" class="tag-badge">{{ . }}</a>{{ end }}
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+    <a href="/posts/" class="all-posts-link">all posts &rarr;</a>
+  </section>
+</div>
+{{ end }}

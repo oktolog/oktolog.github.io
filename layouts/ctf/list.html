@@ -1,0 +1,98 @@
+{{ define "main" }}
+{{ $pages := .Pages }}
+{{ $easy   := where $pages "Params.difficulty" "easy" }}
+{{ $medium := where $pages "Params.difficulty" "medium" }}
+{{ $hard   := where $pages "Params.difficulty" "hard" }}
+{{ $web    := where $pages "Params.category" "web" }}
+{{ $pwn    := where $pages "Params.category" "pwn" }}
+{{ $crypto := where $pages "Params.category" "crypto" }}
+{{ $rev    := where $pages "Params.category" "rev" }}
+
+<div class="ctf-page" data-pagefind-body>
+  <header class="list-header">
+    <h1 class="list-title">ctf writeups</h1>
+  </header>
+
+  {{ if $pages }}
+  <!-- Stats bar -->
+  <div class="ctf-stats">
+    <div class="ctf-stat">
+      <span class="ctf-stat-num">{{ len $pages }}</span>
+      <span class="ctf-stat-label">total</span>
+    </div>
+    <div class="ctf-stats-sep"></div>
+    <div class="ctf-stat">
+      <span class="ctf-stat-num difficulty-easy">{{ len $easy }}</span>
+      <span class="ctf-stat-label">easy</span>
+    </div>
+    <div class="ctf-stat">
+      <span class="ctf-stat-num difficulty-medium">{{ len $medium }}</span>
+      <span class="ctf-stat-label">medium</span>
+    </div>
+    <div class="ctf-stat">
+      <span class="ctf-stat-num difficulty-hard">{{ len $hard }}</span>
+      <span class="ctf-stat-label">hard</span>
+    </div>
+    <div class="ctf-stats-sep"></div>
+    {{ if $web   }}<div class="ctf-stat"><span class="ctf-stat-num">{{ len $web }}</span><span class="ctf-stat-label">web</span></div>{{ end }}
+    {{ if $pwn   }}<div class="ctf-stat"><span class="ctf-stat-num">{{ len $pwn }}</span><span class="ctf-stat-label">pwn</span></div>{{ end }}
+    {{ if $crypto}}<div class="ctf-stat"><span class="ctf-stat-num">{{ len $crypto }}</span><span class="ctf-stat-label">crypto</span></div>{{ end }}
+    {{ if $rev   }}<div class="ctf-stat"><span class="ctf-stat-num">{{ len $rev }}</span><span class="ctf-stat-label">rev</span></div>{{ end }}
+  </div>
+  {{ end }}
+
+  <!-- Category filter -->
+  <div class="filter-bar" role="group" aria-label="Filter by category">
+    <button class="filter-btn active" data-filter="all" onclick="filterCTF('all', this)">all</button>
+    <button class="filter-btn" data-filter="web" onclick="filterCTF('web', this)">web</button>
+    <button class="filter-btn" data-filter="pwn" onclick="filterCTF('pwn', this)">pwn</button>
+    <button class="filter-btn" data-filter="crypto" onclick="filterCTF('crypto', this)">crypto</button>
+    <button class="filter-btn" data-filter="forensics" onclick="filterCTF('forensics', this)">forensics</button>
+    <button class="filter-btn" data-filter="rev" onclick="filterCTF('rev', this)">rev</button>
+    <button class="filter-btn" data-filter="misc" onclick="filterCTF('misc', this)">misc</button>
+  </div>
+
+  {{ if .Pages }}
+  <ul class="post-list ctf-list" role="list">
+    {{ range .Pages }}
+    <li class="post-list-item ctf-item" data-category="{{ .Params.category | default "misc" }}">
+      <div class="ctf-item-header">
+        <span class="ctf-name">{{ .Params.ctf | default "CTF" }}</span>
+        <span class="meta-sep">·</span>
+        {{ with .Params.difficulty }}
+        <span class="difficulty-badge difficulty-{{ . }}">{{ . }}</span>
+        {{ end }}
+        <span class="meta-sep">·</span>
+        <a href="{{ .Permalink }}" class="post-list-title">{{ .Title }}</a>
+      </div>
+      {{ with .Params.description }}
+      <p class="post-list-desc">{{ . }}</p>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="post-list-tags">
+        {{ range . }}<a href="/tags/{{ . | urlize }}/" class="tag-badge">{{ . }}</a>{{ end }}
+      </div>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="empty-state">nothing here yet.</p>
+  {{ end }}
+</div>
+
+<script>
+/* Filter CTF writeups by category */
+function filterCTF(category, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.ctf-item').forEach(item => {
+    if (category === 'all' || item.dataset.category === category) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+</script>
+{{ end }}

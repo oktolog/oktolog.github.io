@@ -1,0 +1,18 @@
+{{ if and .Site.Params.features.giscus (ne .Site.Params.giscus.repoId "FILL_IN") }}
+<div class="comments" id="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ .Site.Params.giscus.repo }}"
+    data-repo-id="{{ .Site.Params.giscus.repoId }}"
+    data-category="{{ .Site.Params.giscus.category }}"
+    data-category-id="{{ .Site.Params.giscus.categoryId }}"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-input-position="bottom"
+    data-theme="{{ if eq .Site.Params.defaultTheme "dark" }}dark{{ else }}light{{ end }}"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+{{ end }}

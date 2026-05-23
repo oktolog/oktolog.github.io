@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article class="post" data-pagefind-body>
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">home</a>
+    <span aria-hidden="true"> / </span>
+    <a href="/{{ .Section }}/">{{ .Section }}</a>
+  </nav>
+
+  <!-- Garden status (notes only) -->
+  {{ if and (eq .Section "notes") .Params.status }}
+  <div class="garden-status status-{{ .Params.status }}">
+    {{ if eq .Params.status "seedling" }}&#127807; seedling
+    {{ else if eq .Params.status "growing" }}&#127807; growing
+    {{ else if eq .Params.status "evergreen" }}&#127795; evergreen
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <h1 class="post-title">{{ .Title }}</h1>
+
+  {{ partial "post-meta.html" . }}
+
+  <hr class="divider">
+
+  <!-- Table of contents -->
+  {{ if .Params.toc }}
+  {{ partial "toc.html" . }}
+  <hr class="divider">
+  {{ end }}
+
+  <!-- Content -->
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+
+  <hr class="divider">
+
+  <!-- Post footer: series nav, related, backlinks, share, comments -->
+  {{ partial "post-footer.html" . }}
+</article>
+{{ end }}
